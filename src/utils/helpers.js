@@ -1,3 +1,6 @@
+const EventEmitter = require('events');
+const ee = new EventEmitter();
+ee.on('log', (...args) => console.log(`${new Date().toLocaleDateString('pt-br')} ${new Date().toLocaleTimeString('pt-br')}`, args));
 const addHeaders = res => {
 	res.setHeader('Access-Control-Allow-Origin', '*');
 	res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -14,3 +17,4 @@ module.exports.success = (res, data = null) => {
 	res.statusCode = 200;
 	res.end(JSON.stringify({ status: 'success', data }, null, 3));
 }
+module.exports.log = (...args) => ee.emit('log', args);

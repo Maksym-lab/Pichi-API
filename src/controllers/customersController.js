@@ -1,9 +1,8 @@
-const customers = require('../data/mock.json');
+const customers = require('../data/mock.json'); 
 const helpers = require('../utils/helpers');
 class customersController {
 	async index (req, res) {
 		try {
-			console.log(customers)
 			return helpers.success(res, customers);
     } catch (error) {
       return helpers.error(res, error);
