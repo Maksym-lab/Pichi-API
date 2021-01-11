@@ -16,6 +16,7 @@
   "dependencies": {
     "dotenv": "^8.0.0",
     "events": "^3.0.0",
+    "fs": "0.0.1-security",
     "http": "0.0.0",
     "nodemon": "^1.19.1",
     "querystring": "^0.2.0"
