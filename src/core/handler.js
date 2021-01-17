@@ -18,8 +18,10 @@ module.exports = async (req, res, routes) => {
 		if (route && typeof route.path === 'object') param = req.url.match(route.path)[1];
 		if (route) {
 			let body = null;
-			if (req.method === 'POST' || req.method === 'PUT')
-				body = await getPostData(req).catch(helpers.error(res, 'Can\'t read posted information', 500));
+			if (
+				req.method === 'POST' ||
+				req.method === 'PUT'
+			) body = await getPostData(req).catch(helpers.error(res, 'Can\'t read posted information', 500));
 			return route.handler(req, res, param, body);
 		} else return helpers.error(res, ' Endpoint not found', 404);
 	}

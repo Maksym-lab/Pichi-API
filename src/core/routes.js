@@ -9,6 +9,11 @@ const routes = [
     method: 'GET',
     path: /\/customers\/([0-9a-z]+)/,
     handler: customersController.show.bind(customersController)
-  }
+  },
+	{
+		method: 'POST',
+		path: '/customers',
+		handler: customersController.new.bind(customersController)
+	},
 ]
 module.exports = routes;
