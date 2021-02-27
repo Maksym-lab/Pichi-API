@@ -1,6 +1,6 @@
 const EventEmitter = require('events');
 const ee = new EventEmitter();
-ee.on('log', (...args) => console.log(`${new Date().toLocaleDateString('pt-br')} ${new Date().toLocaleTimeString('pt-br')}`, args));
+ee.on('log', (...args) => console.log(`${new Date().toLocaleDateString('pt-br')} ${new Date().toLocaleTimeString('pt-br')} --`, args.join(', ')));
 const addHeaders = (res, statusCode) => res.writeHead(statusCode, { 'Content-Type': 'application/json' });
 module.exports.error = (res, error = 'Unknown error occurred', statusCode = 500) => {
 	ee.emit('log', 'Entered error helper', error);
