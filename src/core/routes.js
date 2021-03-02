@@ -15,5 +15,15 @@ const routes = [
 		path: '/customers',
 		handler: customersController.new.bind(customersController)
 	},
+	{
+		method: 'PUT',
+		path: '/customers',
+		handler: customersController.edit.bind(customersController)
+	},
+	{
+		method: 'DELETE',
+		path: /\/customers\/([0-0a-z]+)/,
+		handler: customersController.remove.bind(customersController)
+	}
 ]
 module.exports = routes;
