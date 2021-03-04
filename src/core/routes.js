@@ -22,7 +22,7 @@ const routes = [
 	},
 	{
 		method: 'DELETE',
-		path: /\/customers\/([0-0a-z]+)/,
+		path: /\/customers\/([0-9a-z]+)/,
 		handler: customersController.remove.bind(customersController)
 	}
 ]
