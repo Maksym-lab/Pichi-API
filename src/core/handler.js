@@ -21,7 +21,7 @@ module.exports = async (req, res, routes) => {
 			if (
 				req.method === 'POST' ||
 				req.method === 'PUT'
-			) body = await getPostData(req).catch(helpers.error(res, 'Can\'t read posted information', 500));
+			) body = await getPostData(req).catch((err) => helpers.error(res, 'Invalid body has been sent.', 500));
 			return route.handler(req, res, param, body);
 		} else return helpers.error(res, ' Endpoint not found', 404);
 	}
@@ -31,7 +31,7 @@ const getPostData = (req) => {
 		try {
 			let body = '';
 			req.on('data', chunk => body += chunk.toString());
-			req.on('end', () => resolve(body));
+			req.on('end', () => resolve(JSON.parse(body)));
 		} catch (e) {
 			reject(e);
 		}
