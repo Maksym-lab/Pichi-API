@@ -20,11 +20,40 @@ class customersController {
 	async new (req, res, param, body) {
 		try {
 			if (!body) throw 'Body have not been sent!'; 
-			const { name, country } = JSON.parse(body);
+			const { name, country } = body;
 			const collection = [...customers, { _id: helpers.nextSerial(customers), name, country }];
 			fs.writeFile('./data/database.json', JSON.stringify(collection), 'utf8', (error) => {
 				if (error) throw error;
 				return helpers.success(res, collection);
+			});
+		} catch (error) {
+			return helpers.error(res, error);
+		}
+	}
+	async edit (req, res, param, body) {
+		try {
+			if (!body) throw 'Body have not been sent!'; 
+			const { _id, name, country } = body;
+			const position = customers.findIndex(x => x._id === _id);
+			if (!position && position !== 0) throw 'Invalid record has been passed, verify your request body.';
+			let collection = customers;
+			collection[position] = { _id, name, country };
+			fs.writeFile('./data/database.json', JSON.stringify(collection), 'utf8', (error) => {
+				if (error) throw error;
+				return helpers.success(res, collection);
+			});
+		} catch (error) {
+			return helpers.error(res, error);
+		}
+	}
+	async remove (req, res, param, body) {
+		try {
+			const position = customers.findIndex(x => x._id === parseInt(param));
+			if (position < 0) throw 'Invalid record has been passed, verify your request body.';
+			const collection = customers.splice(position, 1); 
+			fs.writeFile('./data/database.json', JSON.stringify(customers), 'utf8', (error) => {
+				if (error) throw error;
+				return helpers.success(res, customers);
 			});
 		} catch (error) {
 			return helpers.error(res, error);
