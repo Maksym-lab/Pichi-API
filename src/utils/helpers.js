@@ -13,3 +13,4 @@ module.exports.success = (res, data = null) => {
 }
 module.exports.log = (...args) => ee.emit('log', args);
 module.exports.nextSerial = (collection = []) => (Math.max.apply(Math, collection.map(item => item._id)) || 0) + 1;
+module.exports.writeFile = (path, content, charset = 'utf8') => fs.writeFile(path, content, charset, error => error);
