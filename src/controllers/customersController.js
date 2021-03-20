@@ -1,4 +1,3 @@
-const fs = require('fs');
 const customers = require('../data/database.json'); 
 const helpers = require('../utils/helpers');
 class customersController {
@@ -22,10 +21,9 @@ class customersController {
 			if (!body) throw 'Body have not been sent!'; 
 			const { name, country } = body;
 			const collection = [...customers, { _id: helpers.nextSerial(customers), name, country }];
-			fs.writeFile('./data/database.json', JSON.stringify(collection), 'utf8', (error) => {
-				if (error) throw error;
-				return helpers.success(res, collection);
-			});
+			const error = await helpers.writeFile('./data/database.json', JSON.stringify(collection));
+			if (error) throw error;
+			return helpers.success(res, collection);
 		} catch (error) {
 			return helpers.error(res, error);
 		}
@@ -38,10 +36,9 @@ class customersController {
 			if (!position && position !== 0) throw 'Invalid record has been passed, verify your request body.';
 			let collection = customers;
 			collection[position] = { _id, name, country };
-			fs.writeFile('./data/database.json', JSON.stringify(collection), 'utf8', (error) => {
-				if (error) throw error;
-				return helpers.success(res, collection);
-			});
+			const error = await helpers.writeFile('./data/database.json', JSON.stringify(collection));
+			if (error) throw error;
+			return helpers.success(res, collection);
 		} catch (error) {
 			return helpers.error(res, error);
 		}
@@ -51,10 +48,9 @@ class customersController {
 			const position = customers.findIndex(x => x._id === parseInt(param));
 			if (position < 0) throw 'Invalid record has been passed, verify your request body.';
 			const collection = customers.splice(position, 1); 
-			fs.writeFile('./data/database.json', JSON.stringify(customers), 'utf8', (error) => {
-				if (error) throw error;
-				return helpers.success(res, customers);
-			});
+			const error = await helpers.writeFile('./data/database.json', JSON.stringify(customers));
+			if (error) throw error;
+			return helpers.success(res, customers);
 		} catch (error) {
 			return helpers.error(res, error);
 		}

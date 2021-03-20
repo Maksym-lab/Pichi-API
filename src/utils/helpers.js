@@ -1,4 +1,5 @@
 const EventEmitter = require('events');
+const fs = require('fs');
 const ee = new EventEmitter();
 ee.on('log', (...args) => console.log(`${new Date().toLocaleDateString('pt-br')} ${new Date().toLocaleTimeString('pt-br')} --`, args.join(', ')));
 const addHeaders = (res, statusCode) => res.writeHead(statusCode, { 'Content-Type': 'application/json' });
