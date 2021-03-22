@@ -1,17 +1,1 @@
-[
-  {
-		"_id": 1,
-		"name": "Coca Cola",
-		"country": "USA"
-  },
-  {
-		"_id": 2,
-		"name": "Petrobrás",
-		"country": "Brazil"
-  },
-  {
-		"_id": 3,
-		"name": "Volvo",
-		"country": "Denmark"
-  }
-]
+[{"_id":1,"name":"Coca Cola","country":"USA"},{"_id":2,"name":"Petrobrás","country":"Brazil"},{"_id":3,"name":"Volvo","country":"Denmark"},{"_id":4,"name":"Chevrolet","country":"USA"},{"_id":5,"name":"Paulaner","country":"Germany"}]
